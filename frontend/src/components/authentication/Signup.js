@@ -8,7 +8,7 @@ export default function Signup() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
-  const { signup } = useAuth()
+  const { signUp } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -24,7 +24,7 @@ export default function Signup() {
     try {
       setError("") && setLoading(true)
      
-      const uid = await signup(emailRef.current.value, passwordRef.current.value)     
+      const uid = await signUp(emailRef.current.value, passwordRef.current.value)     
       await axios.post(`/admin/${uid}`);
 
       
@@ -68,3 +68,4 @@ export default function Signup() {
     </>
   )
 }
+

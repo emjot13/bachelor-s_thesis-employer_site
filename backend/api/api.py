@@ -22,7 +22,7 @@ def get_employee_data():
     #     users_data_list.append(obj)
     
     # return users_data_list
-    pass
+    return "get_employee_data()"
 
 @app.route('/admin/<id>', methods = ['GET'])
 def employer_data(id):

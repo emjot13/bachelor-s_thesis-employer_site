@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Card, Button, Alert } from "react-bootstrap"
+import { Card, Button, Alert, Navbar } from "react-bootstrap"
 import { useAuth } from "../../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import axios from "axios"
@@ -36,10 +36,28 @@ const handleSignout = async () => {
     setError("Failed to log out")
   }
 }
-
-
+const handleButtonOne = () => {
+    history.push("/oneday")
+}   
+const handleButtonWeekday = () => {
+    history.push("/weekday")
+}
+const handleButtonWeather = () => {
+    history.push("/weather")
+}
   return (
     <>
+    <Navbar>
+        <Button onClick={handleButtonOne}>
+          One Day Fatigue
+        </Button>
+        <Button onClick={handleButtonWeekday}>
+          Weekday Fatigue
+        </Button>
+        <Button onClick={handleButtonWeather}>
+          Weather Fatigue
+        </Button>
+    </Navbar>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Profile</h2>

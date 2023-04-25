@@ -8,6 +8,9 @@ import Login from "./Login"
 import PrivateRoute from "./PrivateRoute"
 import ForgotPassword from "./ForgotPassword"
 import UpdateProfile from "./UpdateProfile"
+import Oneday from "../Oneday"
+import Weather from "../Weather"
+import Weekday from "../Weekday"
 
 function AuthApp() {
   return (
@@ -20,6 +23,9 @@ function AuthApp() {
           <AuthProvider>
             <Switch>
               <PrivateRoute exact path="/" component={Dashboard} />
+              <PrivateRoute exact path="/weather" component={Weather} />  
+              <PrivateRoute exact path="/weekday" component={Weekday} />
+              <PrivateRoute exact path="/oneday" component={Oneday} />
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
