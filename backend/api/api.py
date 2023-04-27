@@ -41,3 +41,12 @@ def create_employer(id):
         return jsonify({"message": "Employer added successfully."}), HTTPStatus.OK
     except:
         return jsonify({"message": "An error occurred while adding the employer."}), HTTPStatus.INTERNAL_SERVER_ERROR
+
+#todo
+@app.route('/admin/<id>/weekday', methods = ['GET'])
+def employersEmployees_data(id):
+    data, http_status = database.employer_info(id)
+    if http_status != HTTPStatus.OK:
+        return jsonify({"error": str(data)}), http_status
+    else:
+        return data, http_status
