@@ -1,5 +1,7 @@
 import Home from './pages/Home/Home'
 import "bootstrap/dist/css/bootstrap.min.css"
+import "./assets/welcome.scss"
+import AuthApp from './components/authentication/AuthApp';
 
 
 function App() {
@@ -9,7 +11,7 @@ function App() {
       <header className="App-header">
       </header>
       <div id="main" class="box">
-    <Home/>
+    <AuthApp/>
     
 
 

@@ -3,13 +3,30 @@ import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { Link, useHistory } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 import axios from "axios"
+import CanvasJSReact from '../assets/canvasjs.react';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function Oneday() {
 
     const { user, signOut } = useAuth()
     const [error, setError] = useState("")
     const [OnedayEmployeeInfo, setOnedayEmployeeInfo] = useState(null);
-    const { date, setDate } = useState(new Date())
+    const [startDate, setStartDate] = useState(new Date());
+
+    var CanvasJS = CanvasJSReact.CanvasJS;
+    var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+
+    var dataPoints =[
+        { label: "8:00",  y: 20  },
+        { label: "9:00", y: 15  },
+        { label: "10:00", y: 14  },
+        { label: "11:00",  y: 14  },
+        { label: "12:00",  y: 18  },
+        { label: "13:00",  y: 19  },
+        { label: "14:00",  y: 22  },
+        { label: "15:00",  y: 25  }
+      ]
   
     const fetchOnedayEmployeeInfo = async () => {
       try {
@@ -25,6 +42,18 @@ export default function Oneday() {
       fetchOnedayEmployeeInfo();
     }, [user]);
 
+    const options = {
+        theme: "light2",
+        title: {
+            text: startDate.getDate() + "day fatigue"
+        },
+        data: [{
+            type: "column",
+            xValueFormatString: "MMM YYYY",
+            yValueFormatString: "#,##0.00",
+            dataPoints: dataPoints
+        }]
+    }
 
     const history = useHistory()
     const Back = () => {
@@ -42,21 +71,16 @@ export default function Oneday() {
         </Card>
         <Card className="d-flex align-items-center justify-content-center">
             <Card.Body>
-                <input type="date"></input>
+                <DatePicker dateFormat="dd/MM/yyyy" selected={startDate} portalId="root-portal" dropdownMode="select" onChange={(d) => setStartDate(d)} />
             </Card.Body>
         </Card>
-        <Container
-            className="d-flex align-items-center justify-content-center"
-            style={{ minHeight: "100vh" }}
-        >
             <div className="w-100" style={{ maxWidth: "800px" }}>
                 <Card>
                     <Card.Body>
-                        oneday {date} graph
+                        <CanvasJSChart options = {options} />
                     </Card.Body>
                 </Card>
             </div>
-        </Container>
         </>
     )
 }

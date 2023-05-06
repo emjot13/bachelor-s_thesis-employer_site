@@ -43,11 +43,14 @@ const handleButtonWeekday = () => {
     history.push("/weekday")
 }
 const handleButtonWeather = () => {
+  console.log(employerInfo.data[0].hours)
     history.push("/weather")
 }
   return (
     <>
-    <Navbar>
+    <Card>
+    <Card.Body>
+      <Navbar className="d-flex align-items-center justify-content-between">
         <Button onClick={handleButtonOne}>
           One Day Fatigue
         </Button>
@@ -57,15 +60,17 @@ const handleButtonWeather = () => {
         <Button onClick={handleButtonWeather}>
           Weather Fatigue
         </Button>
-    </Navbar>
+      </Navbar>
+    </Card.Body>
+    </Card>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Profile</h2>
+          <h2 className="text-center mb-4">Main Page</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <strong>Email:</strong> {user.email}
           {employerInfo && (
             <div>
-              <strong>Employees Number:</strong> {employerInfo.employeesNumber}
+              <strong>Employees Number:</strong> {employerInfo.data[0].hours[0].sleep}
             </div>
           )} 
           <Link to="/update-profile" className="btn btn-primary w-100 mt-3">

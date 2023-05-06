@@ -9,18 +9,12 @@ export default function Weather() {
 
     var CanvasJS = CanvasJSReact.CanvasJS;
     var CanvasJSChart = CanvasJSReact.CanvasJSChart;
- 
-    var dataPoints =[
-        { label: "Sunny",  y: 10  },
-        { label: "Cloudy", y: 15  },
-        { label: "Rainy", y: 25  },
-        { label: "Snowy",  y: 30  }
-    ];
 
     const { user, signOut } = useAuth()
     const [error, setError] = useState("")
     const [WeatherEmployeeInfo, setWeatherEmployeeInfo] = useState(null);
     const [Weather, setWeather] = useState("All");
+    const [dataPoints, setDataPoints] = useState([])
     
     const fetchWeatherEmployeeInfo = async () => {
       try {
@@ -44,7 +38,7 @@ export default function Weather() {
     const options = {
         theme: "light2",
         title: {
-            text: "Weather and average fatige"
+            text: Weather + " fatige"
         },
         data: [{
             type: "column",
@@ -53,6 +47,69 @@ export default function Weather() {
             dataPoints: dataPoints
         }]
     }
+
+    const handleClick = (day) => {
+        switch (day) {
+          case "All":
+            setDataPoints([
+              { label: "Sunny",  y: 7  },
+              { label: "Cloudy", y: 10  },
+              { label: "Rainy", y: 13  },
+              { label: "Snowy",  y: 15  }
+            ])
+            break;
+          case "Sunny":
+            setDataPoints([
+              { label: "8:00",  y: 13  },
+              { label: "9:00", y: 11  },
+              { label: "10:00", y: 9  },
+              { label: "11:00",  y: 8  },
+              { label: "12:00",  y: 8  },
+              { label: "13:00",  y: 12  },
+              { label: "14:00",  y: 14  },
+              { label: "15:00",  y: 16  }
+            ])
+            break;
+          case "Cloudy":
+            setDataPoints([
+              { label: "8:00",  y: 19  },
+              { label: "9:00", y: 17  },
+              { label: "10:00", y: 15  },
+              { label: "11:00",  y: 14  },
+              { label: "12:00",  y: 14  },
+              { label: "13:00",  y: 16  },
+              { label: "14:00",  y: 17  },
+              { label: "15:00",  y: 20  }
+            ])
+            break;
+          case "Rainy":
+            setDataPoints([
+              { label: "8:00",  y: 1  },
+              { label: "9:00", y: 1  },
+              { label: "10:00", y: 5  },
+              { label: "11:00",  y: 4  },
+              { label: "12:00",  y: 4  },
+              { label: "13:00",  y: 6  },
+              { label: "14:00",  y: 7  },
+              { label: "15:00",  y: 1  }
+            ])
+            break;
+          case "Snowy":
+            setDataPoints([
+              { label: "8:00",  y: 1  },
+              { label: "9:00", y: 1  },
+              { label: "10:00", y: 5  },
+              { label: "11:00",  y: 1  },
+              { label: "12:00",  y: 1  },
+              { label: "13:00",  y: 1  },
+              { label: "14:00",  y: 7  },
+              { label: "15:00",  y: 1  }
+            ])
+            break;
+          default:
+            break;
+        }
+      }
     
     return (
         <>
@@ -63,27 +120,24 @@ export default function Weather() {
                 </Button>
             </Card.Body>
         </Card>
-        
-        <Container
-            className="d-flex align-items-center justify-content-center"
-            style={{ minHeight: "100vh" }}
-        >
             <div className="w-100" style={{ maxWidth: "800px" }}>
-            <Card className="d-flex align-items-center justify-content-center">
-                    <Card.Body>
-                    <Navbar>
-                    <Button onClick ={() => {setWeather("All")}}>All</Button>
-                    <Button onClick ={() => {setWeather("Sunny")}}>Sunny</Button>
-                    <Button onClick ={() => {setWeather("Cloudy")}}>Cloudy</Button>
-                    <Button onClick ={() => {setWeather("Rainy")}}>Rainy</Button>
-                    <Button onClick ={() => {setWeather("Snowy")}}>Snowy</Button>
+            <Card className="d-flex align-items-center">
+                <Card.Body style={{ minWidth: "800px" }}>
+                    <Navbar className="d-flex align-items-center justify-content-between">
+                    <Button style={{ width: "100%", marginRight: "5px"}} onClick ={() => {setWeather("All");handleClick("All")}}>All</Button>
+                    <Button style={{ width: "100%", marginRight: "5px"}} onClick ={() => {setWeather("Sunny");handleClick("Sunny")}}>Sunny</Button>
+                    <Button style={{ width: "100%", marginRight: "5px"}} onClick ={() => {setWeather("Cloudy");handleClick("Cloudy")}}>Cloudy</Button>
+                    <Button style={{ width: "100%", marginRight: "5px"}} onClick ={() => {setWeather("Rainy");handleClick("Rainy")}}>Rainy</Button>
+                    <Button style={{ width: "100%", marginRight: "5px"}} onClick ={() => {setWeather("Snowy");handleClick("Snowy")}}>Snowy</Button>
                     </Navbar>
-                        <div className="d-flex align-items-center justify-content-center">{Weather} weather graph</div>
-                        <CanvasJSChart options = {options} />
-                    </Card.Body>
-                </Card>
+                </Card.Body>
+            </Card>
+            <Card>
+                <Card.Body>
+                    <CanvasJSChart options = {options} />
+                </Card.Body>
+            </Card>
             </div>
-        </Container>
         </>
       )
 }

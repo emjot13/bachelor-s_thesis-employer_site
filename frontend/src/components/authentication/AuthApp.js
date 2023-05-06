@@ -43,10 +43,10 @@ function AuthApp() {
       </header>
     <Coffee/>
     <Container
-      className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: "100vh" }}
+      className="d-flex justify-content-center"
+      style={{ minHeight: "100vh", marginTop: "5%" }}
     >
-      <div className="w-100" style={{ maxWidth: "400px" }}>
+      <div className="w-100" style={{ maxWidth: "800px" }}>
         <Router>
           <AuthProvider>
             <Switch>
