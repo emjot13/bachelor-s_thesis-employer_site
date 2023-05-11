@@ -30,7 +30,7 @@ export default function Weekday() {
 
   const fetchWeekdayEmployeeInfo = async () => {
     try {
-      await axios.get(`/admin/${user.uid}`).then(
+      await axios.get(`/admin/${user.uid}/weekday`).then(
         response => setWeekdayEmployeeInfo(response.data)
       )
     } catch (error) {
@@ -47,6 +47,7 @@ export default function Weekday() {
         history.push("/")
     }
     const handleClick = (day) => {
+      console.log(WeekdayEmployeeInfo.data)
       switch (day) {
         case "Monday":
           setDataPoints([

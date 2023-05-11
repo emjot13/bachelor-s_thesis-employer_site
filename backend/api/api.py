@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import request, jsonify
 from http import HTTPStatus
+from datetime import datetime, timedelta
+import calendar
 
 
 from ..database import db as database
@@ -45,8 +47,5 @@ def create_employer(id):
 #todo
 @app.route('/admin/<id>/weekday', methods = ['GET'])
 def employersEmployees_data(id):
-    data, http_status = database.employer_info(id)
-    if http_status != HTTPStatus.OK:
-        return jsonify({"error": str(data)}), http_status
-    else:
-        return data, http_status
+    data = database.get_weekdays(id)
+    return data
