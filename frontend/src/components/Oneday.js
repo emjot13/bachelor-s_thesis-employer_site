@@ -28,19 +28,31 @@ export default function Oneday() {
         { label: "15:00",  y: 25  }
       ]
   
-    const fetchOnedayEmployeeInfo = async () => {
-      try {
-        await axios.get(`/admin/${user.uid}`).then(
-          response => setOnedayEmployeeInfo(response.data)
-        )
-      } catch (error) {
-        console.log(error);
-      }
+    // const fetchOnedayEmployeeInfo = async () => {
+    //   try {
+    //     await axios.get(`/admin/${user.uid}`).then(
+    //       response => setOnedayEmployeeInfo(response.data)
+    //     )
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
+    const handleClick = async () => {
+        try {
+            await axios.get(`/admin/${user.uid}/oneday?date=${startDate.toISOString().split('T')[0]}`).then(
+              response => setOnedayEmployeeInfo(response.data)
+            )
+          } catch (error) {
+            console.log(error);
+          }
+    }
+    const handleClickTest = () => {
+        console.log(OnedayEmployeeInfo)
     }
   
-    useEffect(() => {
-      fetchOnedayEmployeeInfo();
-    }, [user]);
+    // useEffect(() => {
+    //   fetchOnedayEmployeeInfo();
+    // }, [user]);
 
     const options = {
         theme: "light2",
@@ -73,6 +85,8 @@ export default function Oneday() {
             <Card.Body>
                 <DatePicker dateFormat="dd/MM/yyyy" selected={startDate} portalId="root-portal" dropdownMode="select" onChange={(d) => setStartDate(d)} />
             </Card.Body>
+            <Button onClick={handleClick}>submit</Button>
+            <Button onClick={handleClickTest}>test</Button>
         </Card>
             <div className="w-100" style={{ maxWidth: "800px" }}>
                 <Card>

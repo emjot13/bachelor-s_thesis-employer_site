@@ -12,19 +12,19 @@ export default function Dashboard() {
   const [employerInfo, setEmployerInfo] = useState(null);
   const history = useHistory()
 
-  const fetchEmployerInfo = async () => {
-    try {
-      await axios.get(`/admin/${user.uid}`).then(
-        response => setEmployerInfo(response.data)
-      )
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // const fetchEmployerInfo = async () => {
+  //   try {
+  //     await axios.get(`/admin/${user.uid}`).then(
+  //       response => setEmployerInfo(response.data)
+  //     )
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
-  useEffect(() => {
-    fetchEmployerInfo();
-  }, [user]);
+  // useEffect(() => {
+  //   fetchEmployerInfo();
+  // }, [user]);
 
 
 const handleSignout = async () => {

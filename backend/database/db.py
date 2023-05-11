@@ -4,9 +4,6 @@ from dotenv import load_dotenv
 import os
 from http import HTTPStatus
 from datetime import datetime, timedelta
-import calendar
-
-
 
 load_dotenv()
 PORT = 27017
@@ -14,7 +11,6 @@ DATABASE_NAME = "employers"
 CONNECTION_STRING = os.environ.get("CONNECTION_STRING")
 
 client = pymongo.MongoClient(CONNECTION_STRING)
-
 
 employers_database = client[DATABASE_NAME]
 # employers_data_collection = employers_database[COLLECTION_NAME]
@@ -76,5 +72,52 @@ def get_weekdays(id):
                 hourly_averages[day][hour]["avg_sleep"] = total_sleep / count
     return {"data": hourly_averages}
     
+def get_oneday(id, date):
+    IDemployer_collection = employers_database["employerID"]
+    IDemployer_data = IDemployer_collection.find_one({"uid": id})
+    employers_data_collection = employers_database[IDemployer_data["database"]]
+    pipeline = [
+        {
+            '$match': {
+                'day': date
+            }
+        },
+        {
+            '$unwind': '$hours'
+        },
+        {
+            '$group': {
+                '_id': '$hours.hour',
+                'avg_increase_sleep': {'$avg': '$hours.increase_sleep'},
+                'avg_increase_yawns': {'$avg': '$hours.increase_yawns'}
+            }
+        },
+        {
+            '$sort': {
+                '_id': 1
+            }
+        }
+    ]
 
+    result = {
+        'date': date,
+        'hours': []
+    }
+
+    # Execute the aggregation pipeline
+    cursor = employers_data_collection.aggregate(pipeline)
+
+    # Iterate over the aggregation results
+    for doc in cursor:
+        hour = doc['_id']
+        avg_increase_sleep = doc['avg_increase_sleep']
+        avg_increase_yawns = doc['avg_increase_yawns']
+        
+        result['hours'].append({
+            'hour': hour,
+            'avg_increase_sleep': avg_increase_sleep,
+            'avg_increase_yawns': avg_increase_yawns
+        })
+
+    return {"data":result}
 

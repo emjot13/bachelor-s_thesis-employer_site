@@ -44,8 +44,14 @@ def create_employer(id):
     except:
         return jsonify({"message": "An error occurred while adding the employer."}), HTTPStatus.INTERNAL_SERVER_ERROR
 
-#todo
 @app.route('/admin/<id>/weekday', methods = ['GET'])
-def employersEmployees_data(id):
+def employersWeekdayEmployees_data(id):
     data = database.get_weekdays(id)
+    return data
+
+@app.route('/admin/<id>/oneday', methods = ['GET'])
+def employersOnedayEmployees_data(id):
+    date = request.args.get('date')
+    print("date = " + date)
+    data = database.get_oneday(id, date)
     return data
