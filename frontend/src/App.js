@@ -1,4 +1,3 @@
-import Home from './pages/Home/Home'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./assets/welcome.scss"
 import AuthApp from './components/authentication/AuthApp';

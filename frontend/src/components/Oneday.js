@@ -11,22 +11,12 @@ export default function Oneday() {
 
     const { user, signOut } = useAuth()
     const [error, setError] = useState("")
-    const [OnedayEmployeeInfo, setOnedayEmployeeInfo] = useState(null);
+    const [onedayEmployeeInfo, setOnedayEmployeeInfo] = useState(null);
     const [startDate, setStartDate] = useState(new Date());
+    const [dataPoints, setDataPoints] = useState([])
 
     var CanvasJS = CanvasJSReact.CanvasJS;
     var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-
-    var dataPoints =[
-        { label: "8:00",  y: 20  },
-        { label: "9:00", y: 15  },
-        { label: "10:00", y: 14  },
-        { label: "11:00",  y: 14  },
-        { label: "12:00",  y: 18  },
-        { label: "13:00",  y: 19  },
-        { label: "14:00",  y: 22  },
-        { label: "15:00",  y: 25  }
-      ]
   
     // const fetchOnedayEmployeeInfo = async () => {
     //   try {
@@ -40,24 +30,26 @@ export default function Oneday() {
     const handleClick = async () => {
         try {
             await axios.get(`/admin/${user.uid}/oneday?date=${startDate.toISOString().split('T')[0]}`).then(
-              response => setOnedayEmployeeInfo(response.data)
+              response => {
+                setDataPoints([
+                { label: "8:00",  y: (response.data.data.hours[0].avg_increase_sleep + response.data.data.hours[0].avg_increase_yawns)},
+                { label: "9:00", y: (response.data.data.hours[1].avg_increase_sleep + response.data.data.hours[1].avg_increase_yawns)},
+                { label: "10:00", y: (response.data.data.hours[2].avg_increase_sleep + response.data.data.hours[2].avg_increase_yawns)},
+                { label: "11:00",  y: (response.data.data.hours[3].avg_increase_sleep + response.data.data.hours[3].avg_increase_yawns)},
+                { label: "12:00",  y: (response.data.data.hours[4].avg_increase_sleep + response.data.data.hours[4].avg_increase_yawns)},
+                { label: "13:00",  y: (response.data.data.hours[5].avg_increase_sleep + response.data.data.hours[5].avg_increase_yawns)},
+                { label: "14:00",  y: (response.data.data.hours[6].avg_increase_sleep + response.data.data.hours[6].avg_increase_yawns)},
+                { label: "15:00",  y: (response.data.data.hours[7].avg_increase_sleep + response.data.data.hours[7].avg_increase_yawns)}
+              ])}
             )
           } catch (error) {
             console.log(error);
           }
     }
-    const handleClickTest = () => {
-        console.log(OnedayEmployeeInfo)
-    }
-  
-    // useEffect(() => {
-    //   fetchOnedayEmployeeInfo();
-    // }, [user]);
-
     const options = {
         theme: "light2",
         title: {
-            text: startDate.getDate() + "day fatigue"
+            text: startDate.toISOString().split('T')[0] + " day fatigue"
         },
         data: [{
             type: "column",
@@ -85,8 +77,7 @@ export default function Oneday() {
             <Card.Body>
                 <DatePicker dateFormat="dd/MM/yyyy" selected={startDate} portalId="root-portal" dropdownMode="select" onChange={(d) => setStartDate(d)} />
             </Card.Body>
-            <Button onClick={handleClick}>submit</Button>
-            <Button onClick={handleClickTest}>test</Button>
+            <Button onClick={() => {handleClick()}}>submit</Button>
         </Card>
             <div className="w-100" style={{ maxWidth: "800px" }}>
                 <Card>

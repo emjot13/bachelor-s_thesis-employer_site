@@ -47,71 +47,16 @@ export default function Weekday() {
         history.push("/")
     }
     const handleClick = (day) => {
-      console.log(WeekdayEmployeeInfo.data)
-      switch (day) {
-        case "Monday":
-          setDataPoints([
-            { label: "8:00",  y: 20  },
-            { label: "9:00", y: 15  },
-            { label: "10:00", y: 14  },
-            { label: "11:00",  y: 14  },
-            { label: "12:00",  y: 18  },
-            { label: "13:00",  y: 19  },
-            { label: "14:00",  y: 22  },
-            { label: "15:00",  y: 25  }
-          ])
-          break;
-        case "Tuesday":
-          setDataPoints([
-            { label: "8:00",  y: 13  },
-            { label: "9:00", y: 11  },
-            { label: "10:00", y: 9  },
-            { label: "11:00",  y: 8  },
-            { label: "12:00",  y: 8  },
-            { label: "13:00",  y: 12  },
-            { label: "14:00",  y: 14  },
-            { label: "15:00",  y: 16  }
-          ])
-          break;
-        case "Wednesday":
-          setDataPoints([
-            { label: "8:00",  y: 9  },
-            { label: "9:00", y: 7  },
-            { label: "10:00", y: 5  },
-            { label: "11:00",  y: 4  },
-            { label: "12:00",  y: 4  },
-            { label: "13:00",  y: 6  },
-            { label: "14:00",  y: 7  },
-            { label: "15:00",  y: 10  }
-          ])
-          break;
-        case "Thursday":
-          setDataPoints([
-            { label: "8:00",  y: 1  },
-            { label: "9:00", y: 1  },
-            { label: "10:00", y: 5  },
-            { label: "11:00",  y: 4  },
-            { label: "12:00",  y: 4  },
-            { label: "13:00",  y: 6  },
-            { label: "14:00",  y: 7  },
-            { label: "15:00",  y: 1  }
-          ])
-          break;
-        case "Friday":
-          setDataPoints([
-            { label: "8:00",  y: 1  },
-            { label: "9:00", y: 1  },
-            { label: "10:00", y: 5  },
-            { label: "11:00",  y: 1  },
-            { label: "12:00",  y: 1  },
-            { label: "13:00",  y: 1  },
-            { label: "14:00",  y: 7  },
-            { label: "15:00",  y: 1  }
-          ])
-          break;
-        default:
-          break;
-      }
+      setDataPoints([
+        { label: "8:00",  y: (WeekdayEmployeeInfo.data[day][8].avg_sleep + WeekdayEmployeeInfo.data[day][8].avg_yawns)},
+        { label: "9:00", y: (WeekdayEmployeeInfo.data[day][9].avg_sleep + WeekdayEmployeeInfo.data[day][9].avg_yawns)},
+        { label: "10:00", y: (WeekdayEmployeeInfo.data[day][10].avg_sleep + WeekdayEmployeeInfo.data[day][10].avg_yawns)},
+        { label: "11:00",  y: (WeekdayEmployeeInfo.data[day][11].avg_sleep + WeekdayEmployeeInfo.data[day][11].avg_yawns)},
+        { label: "12:00",  y: (WeekdayEmployeeInfo.data[day][12].avg_sleep + WeekdayEmployeeInfo.data[day][12].avg_yawns)},
+        { label: "13:00",  y: (WeekdayEmployeeInfo.data[day][13].avg_sleep + WeekdayEmployeeInfo.data[day][13].avg_yawns)},
+        { label: "14:00",  y: (WeekdayEmployeeInfo.data[day][14].avg_sleep + WeekdayEmployeeInfo.data[day][14].avg_yawns)},
+        { label: "15:00",  y: (WeekdayEmployeeInfo.data[day][15].avg_sleep + WeekdayEmployeeInfo.data[day][15].avg_yawns)}
+      ])
     }
     return (
         <>

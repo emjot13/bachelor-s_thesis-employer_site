@@ -43,7 +43,6 @@ const handleButtonWeekday = () => {
     history.push("/weekday")
 }
 const handleButtonWeather = () => {
-  console.log(employerInfo.data[0].hours)
     history.push("/weather")
 }
   return (

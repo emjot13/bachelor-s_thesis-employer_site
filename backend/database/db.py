@@ -15,20 +15,21 @@ client = pymongo.MongoClient(CONNECTION_STRING)
 employers_database = client[DATABASE_NAME]
 # employers_data_collection = employers_database[COLLECTION_NAME]
 
-def get_collection_number():
-    employers_data_collection = employers_database["employerID"]
-    number = employers_data_collection.find_one({"uid": "current collection number"})
-    return number["database"]
-
 def create_employer(id):
     employers_data_collection = employers_database["employerID"]
-    col_number = get_collection_number()
+    collections = employers_database.list_collection_names()
+    print(collections)
+    num_collections = len(collections)
     employers_data_collection.insert_one(
         {
             "uid": id,
-            "database": "COL" + col_number
+            "database": "COL" + str(num_collections)
         }
     )
+    employers_collection = employers_database["COL" + str(num_collections)]
+    employers_collection.insert_one({
+            "uid": "user created",
+        })
 
 def get_weekdays(id):
     IDemployer_collection = employers_database["employerID"]

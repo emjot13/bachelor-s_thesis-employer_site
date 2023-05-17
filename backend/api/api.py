@@ -39,7 +39,7 @@ def employer_data(id):
 @app.route('/admin/<id>', methods = ['POST'])
 def create_employer(id):
     try:
-        database.create_random_employer_info(id)
+        database.create_employer(id)
         return jsonify({"message": "Employer added successfully."}), HTTPStatus.OK
     except:
         return jsonify({"message": "An error occurred while adding the employer."}), HTTPStatus.INTERNAL_SERVER_ERROR
