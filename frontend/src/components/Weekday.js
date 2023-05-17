@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from "react"
-import { Form, Button, Card, Alert, Container, Navbar } from "react-bootstrap"
+import React, { useState, useEffect } from "react"
+import { Button, Card, Navbar } from "react-bootstrap"
 import { Link, useHistory } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 import axios from "axios"
@@ -8,7 +8,6 @@ import CanvasJSReact from '../assets/canvasjs.react';
 export default function Weekday() {
 
   const { user, signOut } = useAuth()
-  const [error, setError] = useState("")
   const [WeekdayEmployeeInfo, setWeekdayEmployeeInfo] = useState(null);
   const [Weekday, setWeekday] = useState("Weekday");
   const [dataPoints, setDataPoints] = useState([])

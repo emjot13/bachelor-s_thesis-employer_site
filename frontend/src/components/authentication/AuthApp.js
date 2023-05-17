@@ -15,7 +15,6 @@ import { useHistory } from 'react-router-dom';
 import Coffee from '../../components/Coffee';
 
 function AuthApp() {
-  const homeURL = "http://localhost:3000"
   const history = useHistory()
   const Back = () => {
       history.push("/")
@@ -29,7 +28,7 @@ function AuthApp() {
             <div className="col-md-6">
               <h1>Fatigue Tracker</h1>
             </div>
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <nav className="d-flex justify-content-end">
                 <ul className="list-inline mb-0">
                   <li className="list-inline-item"><a href={homeURL} className="text-white">Home</a></li>
@@ -37,7 +36,7 @@ function AuthApp() {
                   <li className="list-inline-item"><a href="#" className="text-white">Contact</a></li>
                 </ul>
               </nav>
-            </div>
+            </div> */}
           </div>
         </div>
       </header>

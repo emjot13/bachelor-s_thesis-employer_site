@@ -67,11 +67,6 @@ const handleButtonWeather = () => {
           <h2 className="text-center mb-4">Main Page</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <strong>Email:</strong> {user.email}
-          {/* {employerInfo && (
-            <div>
-              <strong>Employees Number:</strong> {employerInfo.data[0].hours[0].sleep}
-            </div>
-          )}  */}
           <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
             Update Profile
           </Link>

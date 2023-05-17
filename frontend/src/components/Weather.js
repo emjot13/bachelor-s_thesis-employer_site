@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from "react"
-import { Form, Button, Card, Alert, Container, Navbar } from "react-bootstrap"
+import React, { useState, useEffect } from "react"
+import { Button, Card, Navbar } from "react-bootstrap"
 import { Link, useHistory } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 import axios from "axios"
@@ -11,7 +11,6 @@ export default function Weather() {
     var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
     const { user, signOut } = useAuth()
-    const [error, setError] = useState("")
     const [WeatherEmployeeInfo, setWeatherEmployeeInfo] = useState(null);
     const [Weather, setWeather] = useState("All");
     const [dataPoints, setDataPoints] = useState([])

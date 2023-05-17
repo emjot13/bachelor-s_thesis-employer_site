@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from "react"
-import { Form, Button, Card, Alert, Container } from "react-bootstrap"
-import { Link, useHistory } from "react-router-dom"
+import React, { useState, useEffect } from "react"
+import { Button, Card } from "react-bootstrap"
+import { useHistory } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 import axios from "axios"
 import CanvasJSReact from '../assets/canvasjs.react';
@@ -10,27 +10,17 @@ import "react-datepicker/dist/react-datepicker.css";
 export default function Oneday() {
 
     const { user, signOut } = useAuth()
-    const [error, setError] = useState("")
-    const [onedayEmployeeInfo, setOnedayEmployeeInfo] = useState(null);
     const [startDate, setStartDate] = useState(new Date());
     const [dataPoints, setDataPoints] = useState([])
 
     var CanvasJS = CanvasJSReact.CanvasJS;
     var CanvasJSChart = CanvasJSReact.CanvasJSChart;
   
-    // const fetchOnedayEmployeeInfo = async () => {
-    //   try {
-    //     await axios.get(`/admin/${user.uid}`).then(
-    //       response => setOnedayEmployeeInfo(response.data)
-    //     )
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
     const handleClick = async () => {
         try {
             await axios.get(`/admin/${user.uid}/oneday?date=${startDate.toISOString().split('T')[0]}`).then(
               response => {
+                console.log(response)
                 setDataPoints([
                 { label: "8:00",  y: (response.data.data.hours[0].avg_increase_sleep + response.data.data.hours[0].avg_increase_yawns)},
                 { label: "9:00", y: (response.data.data.hours[1].avg_increase_sleep + response.data.data.hours[1].avg_increase_yawns)},

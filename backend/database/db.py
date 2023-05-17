@@ -13,7 +13,6 @@ CONNECTION_STRING = os.environ.get("CONNECTION_STRING")
 client = pymongo.MongoClient(CONNECTION_STRING)
 
 employers_database = client[DATABASE_NAME]
-# employers_data_collection = employers_database[COLLECTION_NAME]
 
 def create_employer(id):
     employers_data_collection = employers_database["employerID"]
