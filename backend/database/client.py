@@ -9,9 +9,6 @@ admin_client = pymongo.MongoClient("mongodb+srv://admin:admin@admin.lynvddt.mong
 admin_database = admin_client["admin_base"]
 users_data_collection = admin_database["users_data"]
 
-
-
-
 def get_admin_data_between_dates(start_date, end_date):
     if not start_date:
         start_date = datetime(2020,1,1)
@@ -19,7 +16,6 @@ def get_admin_data_between_dates(start_date, end_date):
     if not end_date:
         end_date = datetime(2020,1,20)
         end_date = datetime.strftime(end_date, '%Y-%m-%d')
-
 
     result = users_data_collection.aggregate([
         {

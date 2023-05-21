@@ -12,7 +12,6 @@ import Oneday from "../Oneday"
 import Weather from "../Weather"
 import Weekday from "../Weekday"
 import { useHistory } from 'react-router-dom';
-import Coffee from '../../components/Coffee';
 
 function AuthApp() {
   const history = useHistory()
@@ -40,7 +39,6 @@ function AuthApp() {
           </div>
         </div>
       </header>
-    <Coffee/>
     <Container
       className="d-flex justify-content-center"
       style={{ minHeight: "100vh", marginTop: "5%" }}

@@ -15,19 +15,19 @@ export default function Weather() {
     const [Weather, setWeather] = useState("All");
     const [dataPoints, setDataPoints] = useState([])
     
-    const fetchWeatherEmployeeInfo = async () => {
-      try {
-        await axios.get(`/admin/${user.uid}`).then(
-          response => setWeatherEmployeeInfo(response.data)
-        )
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    // const fetchWeatherEmployeeInfo = async () => {
+    //   try {
+    //     await axios.get(`/admin/${user.uid}`).then(
+    //       response => setWeatherEmployeeInfo(response.data)
+    //     )
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
   
-    useEffect(() => {
-      fetchWeatherEmployeeInfo();
-    }, [user]);
+    // useEffect(() => {
+    //   fetchWeatherEmployeeInfo();
+    // }, [user]);
 
     const history = useHistory()
     const Back = () => {

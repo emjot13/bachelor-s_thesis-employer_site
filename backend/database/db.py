@@ -29,6 +29,13 @@ def create_employer(id):
     employers_collection.insert_one({
             "uid": "user created",
         })
+    
+def get_all(id):
+    IDemployer_collection = employers_database["employerID"]
+    IDemployer_data = IDemployer_collection.find_one({"uid": id})
+    employers_data_collection = employers_database[IDemployer_data["database"]]
+    documents = employers_data_collection.find({})
+    return {"data": documents}
 
 def get_weekdays(id):
     IDemployer_collection = employers_database["employerID"]
