@@ -11,23 +11,26 @@ export default function Weather() {
     var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
     const { user, signOut } = useAuth()
-    const [WeatherEmployeeInfo, setWeatherEmployeeInfo] = useState(null);
+    const [weatherEmployeeInfo, setWeatherEmployeeInfo] = useState(null);
     const [Weather, setWeather] = useState("All");
     const [dataPoints, setDataPoints] = useState([])
     
-    // const fetchWeatherEmployeeInfo = async () => {
-    //   try {
-    //     await axios.get(`/admin/${user.uid}`).then(
-    //       response => setWeatherEmployeeInfo(response.data)
-    //     )
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
+    const fetchWeatherEmployeeInfo = async () => {
+      try {
+        await axios.get(`/admin/${user.uid}/weather`).then(
+          response => {
+            console.log(response)
+            setWeatherEmployeeInfo(response.data)
+          }
+        )
+      } catch (error) {
+        console.log(error);
+      }
+    }
   
-    // useEffect(() => {
-    //   fetchWeatherEmployeeInfo();
-    // }, [user]);
+    useEffect(() => {
+      fetchWeatherEmployeeInfo();
+    }, [user]);
 
     const history = useHistory()
     const Back = () => {
@@ -50,12 +53,13 @@ export default function Weather() {
     const handleClick = (day) => {
         switch (day) {
           case "All":
-            setDataPoints([
-              { label: "Sunny",  y: 7  },
-              { label: "Cloudy", y: 10  },
-              { label: "Rainy", y: 13  },
-              { label: "Snowy",  y: 15  }
-            ])
+            let allDataPoints = [
+              { label: "sunny",  y: 0  },
+              { label: "cloudy", y: 0  },
+              { label: "foggy",  y: 0  },
+              { label: "rainy", y: 0  },
+              { label: "snowy",  y: 0  }]
+            setDataPoints(allDataPoints)
             break;
           case "Sunny":
             setDataPoints([

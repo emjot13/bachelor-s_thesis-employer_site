@@ -36,13 +36,13 @@ def employersOnedayEmployees_data(id):
 
 @app.route('/admin/<id>/weather', methods = ['GET'])
 def employersWeatherEmployees_data(id):
-    #data = database.get_all(id)
+    data = database.get_all(id)
     baseURL = "https://api.open-meteo.com/v1/forecast?"
     latitude = "latitude=" + str(54.35) # location1
     longitude = "longitude=" + str(18.65) # location2
     daily = "daily=" + "weathercode"
     start_date = "start_date=" + str("2023-05-01") # first data
-    end_date = "end_date=" + str("2023-05-18") # yesterday
+    end_date = "end_date=" + str("2023-05-22") # yesterday
     timezone = "timezone=" + "auto"
     endURL = baseURL+"&"+latitude+"&"+longitude+"&"+daily+"&"+start_date+"&"+end_date+"&"+timezone
     response = requests.get(endURL)
@@ -63,7 +63,33 @@ def employersWeatherEmployees_data(id):
     i = 0
     weather_icons = {}
     for date in response["daily"]["time"]:
-        weather_icons[date] = code_to_icon(response["daily"][i])
+        weather_icons[date] = code_to_icon(response["daily"]["weathercode"][i])
         i += 1
-    print(weather_icons)
-    return weather_icons
+    result = {}
+    result["hourly"] = {
+        "sunny": [],
+        "cloudy": [],
+        "foggy": [],
+        "rainy": [],
+        "snowy": [],
+    }
+    result["average"] = {
+        "sunny": [0,0,0],
+        "cloudy": [0,0,0],
+        "foggy": [0,0,0],
+        "rainy": [0,0,0],
+        "snowy": [0,0,0]
+    }
+    for i in data["data"]:
+        if i["day"] in weather_icons.keys():
+            result["hourly"][weather_icons[i["day"]]].append({
+                "hours": i["hours"],
+                "day": i["day"]
+            })
+    for weather in result["hourly"]:
+        for day in result["hourly"][weather]:
+            result["average"][weather][1] += day["hours"][-1]["sleep"] + day["hours"][-1]["yawns"]
+            result["average"][weather][2] += 1
+        if result["average"][weather][2] != 0:
+            result["average"][weather][0] = result["average"][weather][1] / result["average"][weather][2]
+    return result
