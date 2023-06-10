@@ -7,8 +7,8 @@ import CanvasJSReact from '../assets/canvasjs.react';
 
 export default function Weather() {
 
-    var CanvasJS = CanvasJSReact.CanvasJS;
-    var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+    let CanvasJS = CanvasJSReact.CanvasJS;
+    let CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
     const { user, signOut } = useAuth()
     const [weatherEmployeeInfo, setWeatherEmployeeInfo] = useState(null);
@@ -40,7 +40,7 @@ export default function Weather() {
     const options = {
         theme: "light2",
         title: {
-            text: Weather + " fatige"
+            text: Weather + " fatigue"
         },
         data: [{
             type: "column",
@@ -50,69 +50,45 @@ export default function Weather() {
         }]
     }
 
-    const handleClick = (day) => {
-        switch (day) {
-          case "All":
-            let allDataPoints = [
-              { label: "sunny",  y: 0  },
-              { label: "cloudy", y: 0  },
-              { label: "foggy",  y: 0  },
-              { label: "rainy", y: 0  },
-              { label: "snowy",  y: 0  }]
-            setDataPoints(allDataPoints)
-            break;
-          case "Sunny":
-            setDataPoints([
-              { label: "8:00",  y: 13  },
-              { label: "9:00", y: 11  },
-              { label: "10:00", y: 9  },
-              { label: "11:00",  y: 8  },
-              { label: "12:00",  y: 8  },
-              { label: "13:00",  y: 12  },
-              { label: "14:00",  y: 14  },
-              { label: "15:00",  y: 16  }
-            ])
-            break;
-          case "Cloudy":
-            setDataPoints([
-              { label: "8:00",  y: 19  },
-              { label: "9:00", y: 17  },
-              { label: "10:00", y: 15  },
-              { label: "11:00",  y: 14  },
-              { label: "12:00",  y: 14  },
-              { label: "13:00",  y: 16  },
-              { label: "14:00",  y: 17  },
-              { label: "15:00",  y: 20  }
-            ])
-            break;
-          case "Rainy":
-            setDataPoints([
-              { label: "8:00",  y: 1  },
-              { label: "9:00", y: 1  },
-              { label: "10:00", y: 5  },
-              { label: "11:00",  y: 4  },
-              { label: "12:00",  y: 4  },
-              { label: "13:00",  y: 6  },
-              { label: "14:00",  y: 7  },
-              { label: "15:00",  y: 1  }
-            ])
-            break;
-          case "Snowy":
-            setDataPoints([
-              { label: "8:00",  y: 1  },
-              { label: "9:00", y: 1  },
-              { label: "10:00", y: 5  },
-              { label: "11:00",  y: 1  },
-              { label: "12:00",  y: 1  },
-              { label: "13:00",  y: 1  },
-              { label: "14:00",  y: 7  },
-              { label: "15:00",  y: 1  }
-            ])
-            break;
-          default:
-            break;
-        }
+    const handleClick = (weather) => {
+      let values = [
+        { label: "8:00",  y: 0},
+        { label: "9:00", y: 0},
+        { label: "10:00", y: 0},
+        { label: "11:00",  y: 0},
+        { label: "12:00",  y: 0},
+        { label: "13:00",  y: 0},
+        { label: "14:00",  y: 0},
+        { label: "15:00",  y: 0}
+      ]
+      let average_hour_list = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]
+      if (weather === "All"){
+        let allDataPoints = [
+          { label: "sunny",  y: weatherEmployeeInfo.average.sunny[0]  },
+          { label: "cloudy", y: weatherEmployeeInfo.average.cloudy[0]  },
+          { label: "foggy",  y: weatherEmployeeInfo.average.foggy[0]  },
+          { label: "rainy", y: weatherEmployeeInfo.average.rainy[0]  },
+          { label: "snowy",  y: weatherEmployeeInfo.average.snowy[0]  }]
+        setDataPoints(allDataPoints)
+      } else {
+        weatherEmployeeInfo.hourly[weather.toLowerCase()].forEach(day => {
+          let count = 0
+          day.hours.forEach(hour => {
+            if(hour.hour !== 16){
+              average_hour_list[count][0] += hour.increase_sleep + hour.increase_yawns
+              average_hour_list[count][1] += 1
+              count += 1
+            }
+          })
+        });
+        let count = 0
+        average_hour_list.forEach(hour => {
+          values[count].y = hour[0] / hour[1]
+          count += 1
+        }) 
+        setDataPoints(values)
       }
+    }
     
     return (
         <>
@@ -131,6 +107,7 @@ export default function Weather() {
                     <Button style={{ width: "100%", marginRight: "5px"}} onClick ={() => {setWeather("Sunny");handleClick("Sunny")}}>Sunny</Button>
                     <Button style={{ width: "100%", marginRight: "5px"}} onClick ={() => {setWeather("Cloudy");handleClick("Cloudy")}}>Cloudy</Button>
                     <Button style={{ width: "100%", marginRight: "5px"}} onClick ={() => {setWeather("Rainy");handleClick("Rainy")}}>Rainy</Button>
+                    <Button style={{ width: "100%", marginRight: "5px"}} onClick ={() => {setWeather("Foggy");handleClick("Foggy")}}>Foggy</Button>
                     <Button style={{ width: "100%", marginRight: "5px"}} onClick ={() => {setWeather("Snowy");handleClick("Snowy")}}>Snowy</Button>
                     </Navbar>
                 </Card.Body>

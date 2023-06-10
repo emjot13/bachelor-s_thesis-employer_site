@@ -13,8 +13,8 @@ export default function Oneday() {
     const [startDate, setStartDate] = useState(new Date());
     const [dataPoints, setDataPoints] = useState([])
 
-    var CanvasJS = CanvasJSReact.CanvasJS;
-    var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+    let CanvasJS = CanvasJSReact.CanvasJS;
+    let CanvasJSChart = CanvasJSReact.CanvasJSChart;
   
     const handleClick = async () => {
         try {

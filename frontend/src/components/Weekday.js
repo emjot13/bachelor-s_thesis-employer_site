@@ -11,13 +11,13 @@ export default function Weekday() {
   const [WeekdayEmployeeInfo, setWeekdayEmployeeInfo] = useState(null);
   const [Weekday, setWeekday] = useState("Weekday");
   const [dataPoints, setDataPoints] = useState([])
-  var CanvasJS = CanvasJSReact.CanvasJS;
-  var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+  let CanvasJS = CanvasJSReact.CanvasJS;
+  let CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
   const options = {
     theme: "light2",
     title: {
-        text: Weekday + " fatige"
+        text: Weekday + " fatigue"
     },
     data: [{
         type: "column",
