@@ -60,10 +60,11 @@ export default function Weekday() {
     return (
         <>
         <Card>
-            <Card.Body>
+            <Card.Body className="d-flex align-items-center justify-content-center">
                 <Button onClick={Back}>
                     Back
                 </Button>
+                <div style={{ paddingLeft: "15px", fontWeight: "bold"}}>Wybierz dzień tygodnia by sprawdzić średnie zmęczenie wszystkich pracowników w danym dniu!</div>
             </Card.Body>
         </Card>
             <div className="w-100" style={{ minWidth: "800px" }}>

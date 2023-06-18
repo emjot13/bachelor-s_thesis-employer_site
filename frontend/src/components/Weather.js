@@ -93,10 +93,11 @@ export default function Weather() {
     return (
         <>
         <Card>
-            <Card.Body>
+            <Card.Body className="d-flex align-items-center justify-content-center">
                 <Button onClick={Back}>
                     Back
                 </Button>
+                <div style={{ paddingLeft: "15px", fontWeight: "bold"}}>Wybierz pogodę by sprawdzić średnie zmęczenie wszystkich pracowników w danej pogodzie!</div>
             </Card.Body>
         </Card>
             <div className="w-100" style={{ maxWidth: "800px" }}>

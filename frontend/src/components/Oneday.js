@@ -56,15 +56,16 @@ export default function Oneday() {
     return (
         <>
         <Card>
-            <Card.Body>
+            <Card.Body className="d-flex align-items-center justify-content-center">
                 <Button onClick={Back}>
                     Back
                 </Button>
+                <div style={{ paddingLeft: "15px", fontWeight: "bold"}}>Wybierz dzień by sprawdzić średnie zmęczenie wszystkich pracowników w danym dniu!</div>     
             </Card.Body>
         </Card>
         <Card className="d-flex align-items-center justify-content-center">
             <Card.Body>
-                <DatePicker dateFormat="dd/MM/yyyy" selected={startDate} portalId="root-portal" dropdownMode="select" onChange={(d) => setStartDate(d)} />
+                <DatePicker showIcon dateFormat="dd/MM/yyyy" selected={startDate} portalId="root-portal" dropdownMode="select" onChange={(d) => setStartDate(d)} />
             </Card.Body>
             <Button onClick={() => {handleClick()}}>submit</Button>
         </Card>
