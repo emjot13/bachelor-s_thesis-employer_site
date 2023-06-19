@@ -46,18 +46,18 @@ const handleButtonWeather = () => {
     history.push("/weather")
 }
   return (
-    <>
+    <div style={{paddingTop: "15vh"}}>
     <Card>
     <Card.Body>
       <Navbar className="d-flex align-items-center justify-content-between">
         <Button onClick={handleButtonOne}>
-          One Day Fatigue
+          Single Day Fatigue
         </Button>
         <Button onClick={handleButtonWeekday}>
-          Weekday Fatigue
+          Fatigue by Weekday
         </Button>
         <Button onClick={handleButtonWeather}>
-          Weather Fatigue
+          Fatigue by Weather
         </Button>
       </Navbar>
     </Card.Body>
@@ -77,6 +77,6 @@ const handleButtonWeather = () => {
           Log Out
         </Button>
       </div>
-    </>
+    </div>
   )
 }

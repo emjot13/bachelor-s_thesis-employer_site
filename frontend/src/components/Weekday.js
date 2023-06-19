@@ -9,7 +9,7 @@ export default function Weekday() {
 
   const { user, signOut } = useAuth()
   const [WeekdayEmployeeInfo, setWeekdayEmployeeInfo] = useState(null);
-  const [Weekday, setWeekday] = useState("Weekday");
+  const [Weekday, setWeekday] = useState("Monday");
   const [dataPoints, setDataPoints] = useState([])
   let CanvasJS = CanvasJSReact.CanvasJS;
   let CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -25,7 +25,7 @@ export default function Weekday() {
         yValueFormatString: "#,##0.00",
         dataPoints: dataPoints
     }]
-}
+  }
 
   const fetchWeekdayEmployeeInfo = async () => {
     try {
@@ -36,27 +36,28 @@ export default function Weekday() {
       console.log(error);
     }
   }
+  const handleClick = (day) => {
+    setDataPoints([
+      { label: "8:00",  y: (WeekdayEmployeeInfo.data[day][8].avg_sleep + WeekdayEmployeeInfo.data[day][8].avg_yawns)},
+      { label: "9:00", y: (WeekdayEmployeeInfo.data[day][9].avg_sleep + WeekdayEmployeeInfo.data[day][9].avg_yawns)},
+      { label: "10:00", y: (WeekdayEmployeeInfo.data[day][10].avg_sleep + WeekdayEmployeeInfo.data[day][10].avg_yawns)},
+      { label: "11:00",  y: (WeekdayEmployeeInfo.data[day][11].avg_sleep + WeekdayEmployeeInfo.data[day][11].avg_yawns)},
+      { label: "12:00",  y: (WeekdayEmployeeInfo.data[day][12].avg_sleep + WeekdayEmployeeInfo.data[day][12].avg_yawns)},
+      { label: "13:00",  y: (WeekdayEmployeeInfo.data[day][13].avg_sleep + WeekdayEmployeeInfo.data[day][13].avg_yawns)},
+      { label: "14:00",  y: (WeekdayEmployeeInfo.data[day][14].avg_sleep + WeekdayEmployeeInfo.data[day][14].avg_yawns)},
+      { label: "15:00",  y: (WeekdayEmployeeInfo.data[day][15].avg_sleep + WeekdayEmployeeInfo.data[day][15].avg_yawns)}
+    ])
+  }
 
   useEffect(() => {
     fetchWeekdayEmployeeInfo();
   }, [user]);
 
-    const history = useHistory()
-    const Back = () => {
+  const history = useHistory()
+  const Back = () => {
         history.push("/")
-    }
-    const handleClick = (day) => {
-      setDataPoints([
-        { label: "8:00",  y: (WeekdayEmployeeInfo.data[day][8].avg_sleep + WeekdayEmployeeInfo.data[day][8].avg_yawns)},
-        { label: "9:00", y: (WeekdayEmployeeInfo.data[day][9].avg_sleep + WeekdayEmployeeInfo.data[day][9].avg_yawns)},
-        { label: "10:00", y: (WeekdayEmployeeInfo.data[day][10].avg_sleep + WeekdayEmployeeInfo.data[day][10].avg_yawns)},
-        { label: "11:00",  y: (WeekdayEmployeeInfo.data[day][11].avg_sleep + WeekdayEmployeeInfo.data[day][11].avg_yawns)},
-        { label: "12:00",  y: (WeekdayEmployeeInfo.data[day][12].avg_sleep + WeekdayEmployeeInfo.data[day][12].avg_yawns)},
-        { label: "13:00",  y: (WeekdayEmployeeInfo.data[day][13].avg_sleep + WeekdayEmployeeInfo.data[day][13].avg_yawns)},
-        { label: "14:00",  y: (WeekdayEmployeeInfo.data[day][14].avg_sleep + WeekdayEmployeeInfo.data[day][14].avg_yawns)},
-        { label: "15:00",  y: (WeekdayEmployeeInfo.data[day][15].avg_sleep + WeekdayEmployeeInfo.data[day][15].avg_yawns)}
-      ])
-    }
+  }
+    
     return (
         <>
         <Card>
@@ -64,7 +65,7 @@ export default function Weekday() {
                 <Button onClick={Back}>
                     Back
                 </Button>
-                <div style={{ paddingLeft: "15px", fontWeight: "bold"}}>Wybierz dzień tygodnia by sprawdzić średnie zmęczenie wszystkich pracowników w danym dniu!</div>
+                <div style={{ paddingLeft: "15px", fontWeight: "bold"}}>Select a day of the week to check the average fatigue of all employees on a given day!</div>
             </Card.Body>
         </Card>
             <div className="w-100" style={{ minWidth: "800px" }}>

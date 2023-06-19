@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Button, Card } from "react-bootstrap"
+import { Button, Card, Container } from "react-bootstrap"
 import { useHistory } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 import axios from "axios"
@@ -11,11 +11,20 @@ export default function Oneday() {
 
     const { user, signOut } = useAuth()
     const [startDate, setStartDate] = useState(new Date());
-    const [dataPoints, setDataPoints] = useState([])
+    const [dataPoints, setDataPoints] = useState([
+        { label: "8:00",  y: 12},
+        { label: "9:00", y: 10},
+        { label: "10:00", y: 7},
+        { label: "11:00",  y: 6},
+        { label: "12:00",  y: 8},
+        { label: "13:00",  y: 11},
+        { label: "14:00",  y: 13},
+        { label: "15:00",  y: 15}
+      ])
 
     let CanvasJS = CanvasJSReact.CanvasJS;
     let CanvasJSChart = CanvasJSReact.CanvasJSChart;
-  
+
     const handleClick = async () => {
         try {
             await axios.get(`/admin/${user.uid}/oneday?date=${startDate.toISOString().split('T')[0]}`).then(
@@ -60,14 +69,14 @@ export default function Oneday() {
                 <Button onClick={Back}>
                     Back
                 </Button>
-                <div style={{ paddingLeft: "15px", fontWeight: "bold"}}>Wybierz dzień by sprawdzić średnie zmęczenie wszystkich pracowników w danym dniu!</div>     
+                <div style={{ paddingLeft: "15px", fontWeight: "bold"}}>Select a day to check the average fatigue of all employees on a given day!</div>     
             </Card.Body>
         </Card>
         <Card className="d-flex align-items-center justify-content-center">
-            <Card.Body>
+            <Card.Body style={{borderLeft:"solid lightgrey 2px", borderRight:"solid lightgrey 2px"}} className="d-flex flex-column justify-content-center align-items-center">
                 <DatePicker showIcon dateFormat="dd/MM/yyyy" selected={startDate} portalId="root-portal" dropdownMode="select" onChange={(d) => setStartDate(d)} />
+                <Button className="w-50" style={{marginTop: "15px"}} onClick={() => {handleClick()}}>Submit</Button>
             </Card.Body>
-            <Button onClick={() => {handleClick()}}>submit</Button>
         </Card>
             <div className="w-100" style={{ maxWidth: "800px" }}>
                 <Card>
