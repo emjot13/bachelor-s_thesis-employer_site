@@ -41,7 +41,7 @@ function AuthApp() {
       </header>
     <Container
       className="d-flex justify-content-center"
-      style={{ minHeight: "100vh", marginTop: "5%" }}
+      style={{ minHeight: "50vh", marginTop: "5%" }}
     >
       <div className="w-100" style={{ maxWidth: "800px" }}>
         <Router>
@@ -60,8 +60,8 @@ function AuthApp() {
         </Router>
       </div>
     </Container>
-    <main className="d-flex flex-column align-items-center justify-content-center" style={{ height: "90vh" }}>
-        <h2 className="mb-4">Welcome to Fatigue Tracker</h2>
+    <main className="d-flex flex-column align-items-center justify-content-center" style={{ height: "20vh"}}>
+        <h2 className="mb-3 ">Welcome to Fatigue Tracker</h2>
         <p className="lead text-center">Track your employees' fatigue levels and improve their work conditions.</p>
       </main>
       

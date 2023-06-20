@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       </header>
-      <div id="main" class="box">
+      <div id="main" className="box">
         <AuthApp/>
       </div>
     </div>

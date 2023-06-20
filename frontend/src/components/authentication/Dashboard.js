@@ -46,7 +46,7 @@ const handleButtonWeather = () => {
     history.push("/weather")
 }
   return (
-    <div style={{paddingTop: "15vh"}}>
+    <div style={{paddingTop: "8vh"}}>
     <Card>
     <Card.Body>
       <Navbar className="d-flex align-items-center justify-content-between">
@@ -67,9 +67,12 @@ const handleButtonWeather = () => {
           <h2 className="text-center mb-4">Main Page</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <strong>Email:</strong> {user.email}
-          <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
+          <div className="d-flex justify-content-center">
+          <Link to="/update-profile" className="btn btn-primary col-4">
             Update Profile
           </Link>
+          </div>
+          
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">

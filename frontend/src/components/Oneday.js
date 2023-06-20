@@ -12,14 +12,14 @@ export default function Oneday() {
     const { user, signOut } = useAuth()
     const [startDate, setStartDate] = useState(new Date());
     const [dataPoints, setDataPoints] = useState([
-        { label: "8:00",  y: 12},
-        { label: "9:00", y: 10},
-        { label: "10:00", y: 7},
-        { label: "11:00",  y: 6},
-        { label: "12:00",  y: 8},
-        { label: "13:00",  y: 11},
-        { label: "14:00",  y: 13},
-        { label: "15:00",  y: 15}
+        { label: "8:00 - 9:00",  y: 12},
+        { label: "9:00 - 10:00", y: 10},
+        { label: "10:00 - 11:00", y: 7},
+        { label: "11:00 - 12:00",  y: 6},
+        { label: "12:00 - 13:00",  y: 8},
+        { label: "13:00 - 14:00",  y: 11},
+        { label: "14:00 - 15:00",  y: 13},
+        { label: "15:00 - 16:00",  y: 15}
       ])
 
     let CanvasJS = CanvasJSReact.CanvasJS;
@@ -30,14 +30,14 @@ export default function Oneday() {
             await axios.get(`/admin/${user.uid}/oneday?date=${startDate.toISOString().split('T')[0]}`).then(
               response => {
                 setDataPoints([
-                { label: "8:00",  y: (response.data.data.hours[0].avg_increase_sleep + response.data.data.hours[0].avg_increase_yawns)},
-                { label: "9:00", y: (response.data.data.hours[1].avg_increase_sleep + response.data.data.hours[1].avg_increase_yawns)},
-                { label: "10:00", y: (response.data.data.hours[2].avg_increase_sleep + response.data.data.hours[2].avg_increase_yawns)},
-                { label: "11:00",  y: (response.data.data.hours[3].avg_increase_sleep + response.data.data.hours[3].avg_increase_yawns)},
-                { label: "12:00",  y: (response.data.data.hours[4].avg_increase_sleep + response.data.data.hours[4].avg_increase_yawns)},
-                { label: "13:00",  y: (response.data.data.hours[5].avg_increase_sleep + response.data.data.hours[5].avg_increase_yawns)},
-                { label: "14:00",  y: (response.data.data.hours[6].avg_increase_sleep + response.data.data.hours[6].avg_increase_yawns)},
-                { label: "15:00",  y: (response.data.data.hours[7].avg_increase_sleep + response.data.data.hours[7].avg_increase_yawns)}
+                { label: "8:00 - 9:00",   y: (response.data.data.hours[0].avg_increase_sleep + response.data.data.hours[0].avg_increase_yawns)},
+                { label: "9:00 - 10:00", y: (response.data.data.hours[1].avg_increase_sleep + response.data.data.hours[1].avg_increase_yawns)},
+                { label: "10:00 - 11:00", y: (response.data.data.hours[2].avg_increase_sleep + response.data.data.hours[2].avg_increase_yawns)},
+                { label: "11:00 - 12:00",  y: (response.data.data.hours[3].avg_increase_sleep + response.data.data.hours[3].avg_increase_yawns)},
+                { label: "12:00 - 13:00",  y: (response.data.data.hours[4].avg_increase_sleep + response.data.data.hours[4].avg_increase_yawns)},
+                { label: "13:00 - 14:00",  y: (response.data.data.hours[5].avg_increase_sleep + response.data.data.hours[5].avg_increase_yawns)},
+                { label: "14:00 - 15:00",  y: (response.data.data.hours[6].avg_increase_sleep + response.data.data.hours[6].avg_increase_yawns)},
+                { label: "15:00 - 16:00",  y: (response.data.data.hours[7].avg_increase_sleep + response.data.data.hours[7].avg_increase_yawns)}
               ])}
             )
           } catch (error) {
