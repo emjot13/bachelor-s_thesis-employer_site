@@ -6,6 +6,8 @@ import axios from "axios"
 import CanvasJSReact from '../assets/canvasjs.react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import "./components.css"
+
 
 export default function Oneday() {
 
@@ -47,7 +49,7 @@ export default function Oneday() {
     const options = {
         theme: "light2",
         title: {
-            text: startDate.toISOString().split('T')[0] + " day fatigue"
+		text: "Fatigue on " + startDate.toISOString().split('T')[0] + ":"
         },
         data: [{
             type: "column",
@@ -74,7 +76,7 @@ export default function Oneday() {
         </Card>
         <Card className="d-flex align-items-center justify-content-center">
             <Card.Body style={{borderLeft:"solid lightgrey 2px", borderRight:"solid lightgrey 2px"}} className="d-flex flex-column justify-content-center align-items-center">
-                <DatePicker showIcon dateFormat="dd/MM/yyyy" selected={startDate} portalId="root-portal" dropdownMode="select" onChange={(d) => setStartDate(d)} />
+                <DatePicker style={{ textAlign: "center", padding: "6px 10px 5px 10px" }} showIcon dateFormat="dd/MM/yyyy" selected={startDate} portalId="root-portal" dropdownMode="select" onChange={(d) => setStartDate(d)} />
                 <Button className="w-50" style={{marginTop: "15px"}} onClick={() => {handleClick()}}>Submit</Button>
             </Card.Body>
         </Card>

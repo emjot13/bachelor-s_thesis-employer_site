@@ -17,7 +17,7 @@ export default function Weekday() {
   const options = {
     theme: "light2",
     title: {
-        text: Weekday + " fatigue"
+        text: Weekday + "s fatigue"
     },
     data: [{
         type: "column",

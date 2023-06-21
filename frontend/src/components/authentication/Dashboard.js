@@ -47,37 +47,41 @@ export default function Dashboard() {
   }
   return (
     <div style={{ paddingTop: "8vh" }}>
-      <div className="d-flex flex-wrap justify-content-end fixed-top" style={{ marginTop: '9rem', marginRight: '2.5rem' }}>
-        <div>
-        <div className="w-100 text-center" style={{marginBottom: '0.3rem' }}><strong>Email:</strong> {user.email}</div>
-        <Link to="/update-profile" className="btn btn-primary w-100 mt-1">
+      <div className="d-flex flex-wrap justify-content-end fixed-top" style={{ marginTop: '9rem', marginRight: '2.5rem'}}>
+        <div style={{border: "5px aliceblue solid", borderRadius: "30px", padding: "0.8rem"}}>
+        <div className="w-100 text-center" style={{marginBottom: '1rem' }}><strong>Email:</strong> {user.email}</div>
+        <Link to="/update-profile" style={{marginBottom: '1rem', paddingLeft: "2rem", paddingRight: "2rem" }} className="btn btn-primary w-100 mt-1">
           Update Profile
         </Link>
-        <div className="w-100 text-center mt-2" style={{marginBottom: '0.3rem' }}>
-          <Button variant="link" onClick={handleSignout}>
+        <div className="w-100 text-center mt-2">
+          <Button variant="link" onClick={handleSignout} style={{marginTop: '0' }}>
             Log Out
           </Button>
         </div>
         </div>
       </div>
-      <Card>
+      <Card style={{marginBottom: '5rem' }}>
         <Card.Body>
           <Navbar className="d-flex align-items-center justify-content-between">
             <Button onClick={handleButtonOne}>
-              Single Day Fatigue
+              Single day fatigue
             </Button>
             <Button onClick={handleButtonWeekday}>
-              Fatigue by Weekday
+              Fatigue by weekday
             </Button>
             <Button onClick={handleButtonWeather}>
-              Fatigue by Weather
+              Fatigue by weather
             </Button>
           </Navbar>
         </Card.Body>
       </Card>
       <Card>
         <Card.Body>
-          <h5 className="text-center mb-4 mt-4">Choose one of the buttons above to see the fatigue statistics</h5>
+          <h4 className="text-center mb-4 mt-4">Hello!</h4>
+
+          <h5 className="text-center mb-4 mt-4">Here you can look for anonymized and agregated statistics of your employees' tiredness.</h5>
+          <h5 className="text-center mb-4 mt-4">Hopefully it will help you better understand your workplace dynamics.</h5>
+	  <h5 className="text-center mb-4 mt-4">Choose one of the buttons above and see when your employees feel the most tired!</h5>
           {error && <Alert variant="danger">{error}</Alert>}
 
         </Card.Body>
