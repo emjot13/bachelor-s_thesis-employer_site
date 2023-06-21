@@ -27,58 +27,59 @@ export default function Dashboard() {
   // }, [user]);
 
 
-const handleSignout = async () => {
-  setError("")
-  try {
-    await signOut()
-    history.push("/login")
-  } catch {
-    setError("Failed to log out")
+  const handleSignout = async () => {
+    setError("")
+    try {
+      await signOut()
+      history.push("/login")
+    } catch {
+      setError("Failed to log out")
+    }
   }
-}
-const handleButtonOne = () => {
+  const handleButtonOne = () => {
     history.push("/oneday")
-}   
-const handleButtonWeekday = () => {
+  }
+  const handleButtonWeekday = () => {
     history.push("/weekday")
-}
-const handleButtonWeather = () => {
+  }
+  const handleButtonWeather = () => {
     history.push("/weather")
-}
+  }
   return (
-    <div style={{paddingTop: "8vh"}}>
-    <Card>
-    <Card.Body>
-      <Navbar className="d-flex align-items-center justify-content-between">
-        <Button onClick={handleButtonOne}>
-          Single Day Fatigue
-        </Button>
-        <Button onClick={handleButtonWeekday}>
-          Fatigue by Weekday
-        </Button>
-        <Button onClick={handleButtonWeather}>
-          Fatigue by Weather
-        </Button>
-      </Navbar>
-    </Card.Body>
-    </Card>
+    <div style={{ paddingTop: "8vh" }}>
+      <div className="d-flex flex-wrap justify-content-end fixed-top" style={{ marginTop: '9rem', marginRight: '2.5rem' }}>
+        <div>
+        <div className="w-100 text-center" style={{marginBottom: '0.3rem' }}><strong>Email:</strong> {user.email}</div>
+        <Link to="/update-profile" className="btn btn-primary w-100 mt-1">
+          Update Profile
+        </Link>
+        <div className="w-100 text-center mt-2" style={{marginBottom: '0.3rem' }}>
+          <Button variant="link" onClick={handleSignout}>
+            Log Out
+          </Button>
+        </div>
+        </div>
+      </div>
+      <Card>
+        <Card.Body>
+          <Navbar className="d-flex align-items-center justify-content-between">
+            <Button onClick={handleButtonOne}>
+              Single Day Fatigue
+            </Button>
+            <Button onClick={handleButtonWeekday}>
+              Fatigue by Weekday
+            </Button>
+            <Button onClick={handleButtonWeather}>
+              Fatigue by Weather
+            </Button>
+          </Navbar>
+        </Card.Body>
+      </Card>
       <Card>
         <Card.Body>
           <h5 className="text-center mb-4 mt-4">Choose one of the buttons above to see the fatigue statistics</h5>
           {error && <Alert variant="danger">{error}</Alert>}
-          
-          <div className="d-flex flex-wrap justify-content-end fixed-top" style={{marginTop: '13rem', marginRight: '5rem'}}> 
-            <div className="w-100 text-right" style={{marginRight: '3rem', marginBottom: '0.3rem'}}><strong>Email:</strong> {user.email}</div>
-          <Link to="/update-profile" className="btn btn-primary col-1">
-            Update Profile
-          </Link>
-          <div className="w-100 text-right mt-2" style={{marginRight: '2.5rem', marginBottom: '0.3rem'}}>
-        <Button variant="link" onClick={handleSignout}>
-          Log Out
-        </Button>
-      </div>
-          </div>
-          
+
         </Card.Body>
       </Card>
     </div>
