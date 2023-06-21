@@ -64,22 +64,23 @@ const handleButtonWeather = () => {
     </Card>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Main Page</h2>
+          <h5 className="text-center mb-4 mt-4">Choose one of the buttons above to see the fatigue statistics</h5>
           {error && <Alert variant="danger">{error}</Alert>}
-          <strong>Email:</strong> {user.email}
-          <div className="d-flex justify-content-center">
-          <Link to="/update-profile" className="btn btn-primary col-4">
+          
+          <div className="d-flex flex-wrap justify-content-end fixed-top" style={{marginTop: '13rem', marginRight: '5rem'}}> 
+            <div className="w-100 text-right" style={{marginRight: '3rem', marginBottom: '0.3rem'}}><strong>Email:</strong> {user.email}</div>
+          <Link to="/update-profile" className="btn btn-primary col-1">
             Update Profile
           </Link>
-          </div>
-          
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
+          <div className="w-100 text-right mt-2" style={{marginRight: '2.5rem', marginBottom: '0.3rem'}}>
         <Button variant="link" onClick={handleSignout}>
           Log Out
         </Button>
       </div>
+          </div>
+          
+        </Card.Body>
+      </Card>
     </div>
   )
 }

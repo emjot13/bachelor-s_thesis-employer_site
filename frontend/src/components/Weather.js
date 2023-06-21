@@ -52,14 +52,14 @@ export default function Weather() {
 
     const handleClick = (weather) => {
       let values = [
-        { label: "8:00",  y: 0},
-        { label: "9:00", y: 0},
-        { label: "10:00", y: 0},
-        { label: "11:00",  y: 0},
-        { label: "12:00",  y: 0},
-        { label: "13:00",  y: 0},
-        { label: "14:00",  y: 0},
-        { label: "15:00",  y: 0}
+        { label: "8:00 - 9:00",   y: 0},
+        { label: "9:00 - 10:00", y: 0},
+        { label: "10:00 - 11:00", y: 0},
+        { label: "11:00 - 12:00",  y: 0},
+        { label: "12:00 - 13:00",  y: 0},
+        { label: "13:00 - 14:00",  y: 0},
+        { label: "14:00 - 15:00",  y: 0},
+        { label: "15:00 - 16:00",  y: 0}
       ]
       let average_hour_list = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]
       if (weather === "All"){

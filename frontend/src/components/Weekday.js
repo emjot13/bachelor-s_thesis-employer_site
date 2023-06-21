@@ -38,14 +38,14 @@ export default function Weekday() {
   }
   const handleClick = (day) => {
     setDataPoints([
-      { label: "8:00",  y: (WeekdayEmployeeInfo.data[day][8].avg_sleep + WeekdayEmployeeInfo.data[day][8].avg_yawns)},
-      { label: "9:00", y: (WeekdayEmployeeInfo.data[day][9].avg_sleep + WeekdayEmployeeInfo.data[day][9].avg_yawns)},
-      { label: "10:00", y: (WeekdayEmployeeInfo.data[day][10].avg_sleep + WeekdayEmployeeInfo.data[day][10].avg_yawns)},
-      { label: "11:00",  y: (WeekdayEmployeeInfo.data[day][11].avg_sleep + WeekdayEmployeeInfo.data[day][11].avg_yawns)},
-      { label: "12:00",  y: (WeekdayEmployeeInfo.data[day][12].avg_sleep + WeekdayEmployeeInfo.data[day][12].avg_yawns)},
-      { label: "13:00",  y: (WeekdayEmployeeInfo.data[day][13].avg_sleep + WeekdayEmployeeInfo.data[day][13].avg_yawns)},
-      { label: "14:00",  y: (WeekdayEmployeeInfo.data[day][14].avg_sleep + WeekdayEmployeeInfo.data[day][14].avg_yawns)},
-      { label: "15:00",  y: (WeekdayEmployeeInfo.data[day][15].avg_sleep + WeekdayEmployeeInfo.data[day][15].avg_yawns)}
+      { label: "8:00 - 9:00",   y: (WeekdayEmployeeInfo.data[day][8].avg_sleep + WeekdayEmployeeInfo.data[day][8].avg_yawns)},
+      { label: "9:00 - 10:00", y: (WeekdayEmployeeInfo.data[day][9].avg_sleep + WeekdayEmployeeInfo.data[day][9].avg_yawns)},
+      { label: "10:00 - 11:00", y: (WeekdayEmployeeInfo.data[day][10].avg_sleep + WeekdayEmployeeInfo.data[day][10].avg_yawns)},
+      { label: "11:00 - 12:00",  y: (WeekdayEmployeeInfo.data[day][11].avg_sleep + WeekdayEmployeeInfo.data[day][11].avg_yawns)},
+      { label: "12:00 - 13:00",  y: (WeekdayEmployeeInfo.data[day][12].avg_sleep + WeekdayEmployeeInfo.data[day][12].avg_yawns)},
+      { label: "13:00 - 14:00",  y: (WeekdayEmployeeInfo.data[day][13].avg_sleep + WeekdayEmployeeInfo.data[day][13].avg_yawns)},
+      { label: "14:00 - 15:00",  y: (WeekdayEmployeeInfo.data[day][14].avg_sleep + WeekdayEmployeeInfo.data[day][14].avg_yawns)},
+      { label: "15:00 - 16:00",  y: (WeekdayEmployeeInfo.data[day][15].avg_sleep + WeekdayEmployeeInfo.data[day][15].avg_yawns)}
     ])
   }
 
