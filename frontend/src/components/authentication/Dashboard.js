@@ -12,72 +12,80 @@ export default function Dashboard() {
   const [employerInfo, setEmployerInfo] = useState(null);
   const history = useHistory()
 
-  const fetchEmployerInfo = async () => {
+  // const fetchEmployerInfo = async () => {
+  //   try {
+  //     await axios.get(`/admin/${user.uid}`).then(
+  //       response => setEmployerInfo(response.data)
+  //     )
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   fetchEmployerInfo();
+  // }, [user]);
+
+
+  const handleSignout = async () => {
+    setError("")
     try {
-      await axios.get(`/admin/${user.uid}`).then(
-        response => setEmployerInfo(response.data)
-      )
-    } catch (error) {
-      console.log(error);
+      await signOut()
+      history.push("/login")
+    } catch {
+      setError("Failed to log out")
     }
   }
-
-  useEffect(() => {
-    fetchEmployerInfo();
-  }, [user]);
-
-
-const handleSignout = async () => {
-  setError("")
-  try {
-    await signOut()
-    history.push("/login")
-  } catch {
-    setError("Failed to log out")
-  }
-}
-const handleButtonOne = () => {
+  const handleButtonOne = () => {
     history.push("/oneday")
-}   
-const handleButtonWeekday = () => {
+  }
+  const handleButtonWeekday = () => {
     history.push("/weekday")
-}
-const handleButtonWeather = () => {
+  }
+  const handleButtonWeather = () => {
     history.push("/weather")
-}
+  }
   return (
-    <>
-    <Navbar>
-        <Button onClick={handleButtonOne}>
-          One Day Fatigue
-        </Button>
-        <Button onClick={handleButtonWeekday}>
-          Weekday Fatigue
-        </Button>
-        <Button onClick={handleButtonWeather}>
-          Weather Fatigue
-        </Button>
-    </Navbar>
-      <Card>
+    <div style={{ paddingTop: "8vh" }}>
+      <div className="d-flex flex-wrap justify-content-end fixed-top" style={{ marginTop: '9rem', marginRight: '2.5rem'}}>
+        <div style={{border: "5px aliceblue solid", borderRadius: "30px", padding: "0.8rem"}}>
+        <div className="w-100 text-center" style={{marginBottom: '1rem' }}><strong>Email:</strong> {user.email}</div>
+        <Link to="/update-profile" style={{marginBottom: '1rem', paddingLeft: "2rem", paddingRight: "2rem" }} className="btn btn-primary w-100 mt-1">
+          Update Profile
+        </Link>
+        <div className="w-100 text-center mt-2">
+          <Button variant="link" onClick={handleSignout} style={{marginTop: '0' }}>
+            Log Out
+          </Button>
+        </div>
+        </div>
+      </div>
+      <Card style={{marginBottom: '5rem' }}>
         <Card.Body>
-          <h2 className="text-center mb-4">Profile</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <strong>Email:</strong> {user.email}
-          {employerInfo && (
-            <div>
-              <strong>Employees Number:</strong> {employerInfo.employeesNumber}
-            </div>
-          )} 
-          <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
-            Update Profile
-          </Link>
+          <Navbar className="d-flex align-items-center justify-content-between">
+            <Button onClick={handleButtonOne}>
+              Single day fatigue
+            </Button>
+            <Button onClick={handleButtonWeekday}>
+              Fatigue by weekday
+            </Button>
+            <Button onClick={handleButtonWeather}>
+              Fatigue by weather
+            </Button>
+          </Navbar>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        <Button variant="link" onClick={handleSignout}>
-          Log Out
-        </Button>
-      </div>
-    </>
+      <Card>
+        <Card.Body>
+          <h4 className="text-center mb-4 mt-4">Hello!</h4>
+
+          <h5 className="text-center mb-4 mt-4">Here you can look for anonymized and agregated statistics of your employees' tiredness.</h5>
+          <h5 className="text-center mb-4 mt-4">Hopefully it will help you better understand your workplace dynamics.</h5>
+	  <h5 className="text-center mb-4 mt-4">Choose one of the buttons above and see when your employees feel the most tired!</h5>
+          {error && <Alert variant="danger">{error}</Alert>}
+
+        </Card.Body>
+      </Card>
+    </div>
   )
 }
